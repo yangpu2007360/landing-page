@@ -5,7 +5,7 @@
         </div>
         <div class="book-a-demo-form">
             <div class="book-a-demo-left">
-                <textarea class="message-input" placeholder="Message">
+                <textarea class="message-input" placeholder="Message" v-model="usermessage">
                 </textarea>
                 <div class="email-section"> 
                     <img :src="emailIcon">
@@ -14,13 +14,16 @@
                 </div>
             </div>
             <div class="book-a-demo-right">
-                <input class="enter-name" placeholder="Name">
-                <input class="enter-email" placeholder="Email">
+                <input class="enter-name" placeholder="Name" v-model="username">
+                <div class="email-container">
+                <input :class="{'enter-email':!incorrectEmailFormat,'enter-email-invalid':incorrectEmailFormat}" placeholder="Email" v-model="useremail">
+                <div :class="{'invalid-email': incorrectEmailFormat, 'valid-email':!incorrectEmailFormat}"> Invalid email</div>
+                </div>
                 <div class="enter-phone">
                     <div class="phone-areacode"><div>+1</div><img :src="usFlag" class="nation-flag"></div>
-                    <input class="phone-number" placeholder="Phone">
+                    <input class="phone-number" placeholder="Phone" v-model="userphone">
                 </div>
-                <div class="send-button">Send</div>
+                <div class="send-button" @click="submitInfo">Send</div>
             </div>
         </div>
     </div>
@@ -37,6 +40,35 @@ export default {
       usFlag,
       emailIcon,
       socialMedia
+    }
+  },
+  data() {
+    return {
+      username: '',
+      useremail: '',
+      userphone:'',
+      usermessage:'',
+      incorrectEmailFormat: false
+    }
+  },
+  methods: {
+    submitInfo() {
+        const regexp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        if (!regexp.test(this.useremail)) {
+            console.log("email format wrong!")
+            this.incorrectEmailFormat = true
+				}
+        else{
+          console.log("email format correct")
+          this.incorrectEmailFormat=false
+          if (this.username&&this.useremail&&this.userphone&&this.usermessage){
+            console.log("will submit info")
+            this.$router.push('Contact') 
+            }
+          else{
+            console.log("incomplete info")
+            }
+        }
     }
   }
 }
@@ -86,7 +118,6 @@ export default {
     background-color: #3683FC1A;
     margin-bottom: 40px;
     border: none;
-;
 }
 .enter-email{
     height: 47px;
@@ -94,8 +125,17 @@ export default {
     border-radius: 6px;
     padding: 8px 18px 8px 18px;
     background-color: #3683FC1A;
-    margin-bottom: 40px;
     border: none;
+}
+.enter-email-invalid{
+    height: 47px;
+    width: 617px;
+    border-radius: 6px;
+    padding: 8px 18px 8px 18px;
+    background-color: #FC5A5A2E;
+    border: 2px solid red;
+    background: rgba(252, 90, 90, 0.18);
+    border-radius: 6px;
 }
 .enter-phone{
     display: flex;
@@ -137,6 +177,9 @@ export default {
     margin-top: 160px;
     margin-left: 397px;
 }
+.send-button:hover{
+    cursor: pointer;
+}
 .email-section{
     display: flex;
 }
@@ -147,6 +190,22 @@ export default {
     font-weight: 400;
     line-height: 31px;
     margin-right: 96px;
+}
+.invalid-email{
+    color: red;
+    position:absolute;
+    bottom:-30px;
+    left:10px
+}
+.valid-email{
+    position:absolute;
+    bottom:-30px;
+    left:10px;
+    visibility: hidden;
+}
+.email-container{
+    position:relative;
+    margin-bottom: 69px;
 }
 
 </style>

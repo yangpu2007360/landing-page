@@ -1,5 +1,6 @@
 <template>
-<BookADemo/>
+<!-- <BookADemo/> -->
+<router-view/>
 </template>
 
 <script setup>
