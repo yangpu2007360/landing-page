@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Contact from '../components/ContactMe.vue'
-import BookADemo from '../components/BookADemo.vue'
+import MainPage from '../components/MainPage.vue'
+
 
 
 const router = createRouter({
@@ -8,8 +9,8 @@ const router = createRouter({
   routes: [
     {
         path: '/',
-        name: 'BookADemo',
-        component: BookADemo
+        name: 'MainPage',
+        component: MainPage
       },
     {
       path: '/contact',
