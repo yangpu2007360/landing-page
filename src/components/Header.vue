@@ -4,7 +4,17 @@
             <img :src="longevityLogo">
             <div class="navagation">
                 <div class="nav-item">RESOURCES</div>
-                <div class="nav-item">SOLUTIONS</div>
+                <div class="nav-item" @click="this.showallsolutions=!this.showallsolutions">
+                    <div class="solutions-word">SOLUTIONS</div>
+                    <div :class="{'all-solutions': showallsolutions, 'all-solutions-hidden':!showallsolutions }">
+                        <div>API / Disease pediction</div>
+                        <div>API / Disease Prediction Models</div>
+                        <div>API / Depersonalization</div>
+                        <div>API / Document Analysis</div>
+                        <div>API / Data Structuring</div>
+                        <div>API / Data Structuring</div>
+                    </div>
+                </div>
                 <div class="nav-item">SUPPORT</div>
                 <div class="nav-item">PRICING</div>
                 <div class="nav-item">LOGIN</div>
@@ -33,7 +43,12 @@ export default {
     return {
         longevityLogo
     }
-  }
+  },
+  data() {
+    return {
+      showallsolutions: false, 
+    }
+  },
 }
 </script>
 
@@ -61,6 +76,24 @@ export default {
     font-weight: 400;
     line-height: 26px;
     margin-right: 54px;
+    position: relative;
+}
+.solutions-word:hover{
+    background-color: #FFFFFF;
+}
+.all-solutions{
+    position: absolute;
+    width: 408px;
+    bottom: -120px;
+    left: 0px;
+    background-color: white;
+}
+.all-solutions-hidden{
+    position: absolute;
+    width: 408px;
+    bottom: -120px;
+    left: 0px;
+    visibility: hidden;
 }
 .header-title{
     font-family: DM Mono;
