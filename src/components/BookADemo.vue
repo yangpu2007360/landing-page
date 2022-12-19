@@ -27,11 +27,13 @@
             </div>
         </div>
     </div>
+    <img :src="footer">
 </template>
 <script>
 import usFlag from "@/assets/usflag.png"
 import emailIcon from "@/assets/emailicon.png"
 import socialMedia from "@/assets/socialmediagrou.png"
+import footer from "@/assets/footer.png"
 
 
 export default {
@@ -39,7 +41,8 @@ export default {
     return {
       usFlag,
       emailIcon,
-      socialMedia
+      socialMedia,
+      footer
     }
   },
   data() {
